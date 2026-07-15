@@ -1,0 +1,58 @@
+{
+  "name": "portmon",
+  "version": "1.0.0",
+  "description": "Cross-platform CLI to list listening ports and kill processes by port or PID",
+  "type": "module",
+  "bin": {
+    "portmon": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "start": "node dist/cli.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "port",
+    "ports",
+    "monitor",
+    "cli",
+    "kill-port",
+    "kill",
+    "process",
+    "netstat",
+    "lsof",
+    "listening",
+    "tcp",
+    "watch",
+    "devtools"
+  ],
+  "author": "alaminrifat",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alaminrifat/portmon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alaminrifat/portmon/issues"
+  },
+  "homepage": "https://github.com/alaminrifat/portmon#readme",
+  "dependencies": {
+    "cli-table3": "^0.6.5",
+    "commander": "^13.1.0",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}
