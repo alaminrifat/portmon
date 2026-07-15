@@ -114,6 +114,74 @@ Open an issue describing:
 
 Be respectful and constructive. Harassment or bad-faith behavior will not be tolerated.
 
+## Releasing (maintainers)
+
+Publishing to npm is automated via GitHub Actions when you create a **GitHub Release**.
+
+### One-time setup
+
+Choose **one** of the following.
+
+#### Option A — npm Trusted Publishing (recommended)
+
+No long-lived token on GitHub. npm trusts this repo’s publish workflow via OIDC.
+
+1. Open the package on npm: https://www.npmjs.com/package/portmon  
+2. Go to **Settings → Trusted Publisher** (or **Publishing access**)  
+3. Add a GitHub Actions publisher:
+   - **Organization or user:** `alaminrifat`
+   - **Repository:** `portmon`
+   - **Workflow filename:** `publish.yml`
+   - **Environment:** leave empty (unless you use GitHub Environments)
+4. Save
+
+#### Option B — `NPM_TOKEN` secret
+
+1. Create a **Granular Access Token** at https://www.npmjs.com/settings/~/tokens  
+   - Permission: **Read and write**  
+   - Packages: select `portmon` (or all packages)  
+   - Enable automation / bypass 2FA if offered  
+2. In the GitHub repo: **Settings → Secrets and variables → Actions**  
+3. Add secret name: `NPM_TOKEN`  
+4. Paste the token value
+
+### Publish a new version
+
+1. Bump the version in `package.json` (and commit):
+
+   ```bash
+   npm version patch   # 1.0.0 -> 1.0.1
+   # or: npm version minor / npm version major
+   ```
+
+   `npm version` creates a commit and a git tag (e.g. `v1.0.1`).
+
+2. Push the commit and tag:
+
+   ```bash
+   git push origin main --follow-tags
+   ```
+
+3. Create a GitHub Release for that tag (UI or CLI):
+
+   ```bash
+   gh release create v1.0.1 --title "v1.0.1" --notes "Bug fixes and improvements"
+   ```
+
+4. The **Publish to npm** workflow runs and publishes the package.
+
+Check progress under the repo **Actions** tab. After success:
+
+```bash
+npm view portmon version
+```
+
+### Notes
+
+- The version in `package.json` must be **new** on npm (you cannot republish `1.0.0`).
+- `prepublishOnly` runs `npm run build` during publish.
+- CI (build + smoke test) runs on every push/PR to `main`.
+
 ## License
 
 By contributing, you agree that your contributions will be licensed under the [MIT License](./LICENSE).
