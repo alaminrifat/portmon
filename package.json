@@ -4,7 +4,7 @@
   "description": "Cross-platform CLI to list listening ports and kill processes by port or PID",
   "type": "module",
   "bin": {
-    "portmon": "./dist/cli.js"
+    "portmon": "dist/cli.js"
   },
   "files": [
     "dist",
