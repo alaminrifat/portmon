@@ -1,6 +1,6 @@
 {
   "name": "portmon",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cross-platform CLI to list listening ports and kill processes by port or PID",
   "type": "module",
   "bin": {
@@ -11,6 +11,9 @@
     "README.md",
     "LICENSE"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=18"
   },

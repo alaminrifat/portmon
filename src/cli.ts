@@ -46,12 +46,12 @@ program
 program
   .command('find')
   .alias('who')
-  .description('Show which process is using a port')
-  .argument('<port>', 'Port number (1–65535)')
+  .description('Show which process is using a port (one or more)')
+  .argument('<ports...>', 'Port number(s) (1–65535)')
   .option('--udp', 'Include UDP sockets')
   .option('--json', 'Output as JSON')
-  .action(async (port: string, opts: { udp?: boolean; json?: boolean }) => {
-    await runFind(port, opts);
+  .action(async (ports: string[], opts: { udp?: boolean; json?: boolean }) => {
+    await runFind(ports, opts);
   });
 
 program

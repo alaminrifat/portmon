@@ -56,6 +56,7 @@ Show which process is listening on a port.
 ```bash
 portmon find 3000
 portmon who 5173
+portmon find 3000 5173   # check multiple ports
 portmon find 3000 --json
 ```
 
