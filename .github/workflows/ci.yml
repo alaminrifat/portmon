@@ -29,5 +29,6 @@ jobs:
         run: |
           node dist/cli.js --version
           node dist/cli.js --help
-          node dist/cli.js list --json > /tmp/ports.json
-          node -e "const d=require('fs').readFileSync('/tmp/ports.json','utf8'); JSON.parse(d); console.log('list --json ok')"
+          # Subcommand options must be parsed; write JSON and validate
+          node dist/cli.js list --json | tee /tmp/ports.json
+          node --input-type=module -e "import fs from 'fs'; const d=JSON.parse(fs.readFileSync('/tmp/ports.json','utf8')); if (!Array.isArray(d)) throw new Error('expected array'); console.log('list --json ok', d.length)"

@@ -27,14 +27,13 @@ program
   .description('Monitor listening ports and kill processes by port or PID')
   .version(getVersion())
   .showHelpAfterError()
-  .option('--udp', 'Include UDP sockets (with default list)')
-  .option('--json', 'Output as JSON (with default list)')
   .configureOutput({
     outputError: (str, write) => write(pc.red(str)),
   });
 
+// Default command when no subcommand is given (portmon / portmon --json)
 program
-  .command('list')
+  .command('list', { isDefault: true })
   .alias('ls')
   .description('List listening ports (default command)')
   .option('--udp', 'Include UDP sockets')
@@ -97,11 +96,6 @@ program
       interval: Number.isFinite(interval) ? interval : 2000,
     });
   });
-
-// Default to `list` when no subcommand is given
-program.action(async (opts: { udp?: boolean; json?: boolean }) => {
-  await runList(opts);
-});
 
 async function main(): Promise<void> {
   try {
