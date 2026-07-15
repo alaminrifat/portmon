@@ -144,6 +144,8 @@ npm run build
 node dist/cli.js list
 ```
 
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for setup details, guidelines, and how to submit pull requests.
+
 ## License
 
 [MIT](./LICENSE)
