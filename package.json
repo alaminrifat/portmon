@@ -1,6 +1,6 @@
 {
   "name": "portmon",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Cross-platform CLI to list listening ports and kill processes by port or PID",
   "type": "module",
   "bin": {
@@ -12,7 +12,8 @@
     "LICENSE"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "engines": {
     "node": ">=18"
@@ -42,7 +43,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alaminrifat/portmon.git"
+    "url": "https://github.com/alaminrifat/portmon.git"
   },
   "bugs": {
     "url": "https://github.com/alaminrifat/portmon/issues"
