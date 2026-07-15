@@ -8,21 +8,21 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # Trusted Publishing (OIDC) + optional NPM_TOKEN fallback
     permissions:
       contents: read
-      id-token: write # required for npm OIDC trusted publishing
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Do not set registry-url here — it injects a dummy NODE_AUTH_TOKEN
-      # (XXXXX-XXXXX-XXXXX-XXXXX) that breaks trusted publishing with 404.
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          registry-url: https://registry.npmjs.org
 
-      - name: Show npm/node versions
+      - name: Show versions
         run: |
           node -v
           npm -v
@@ -33,5 +33,9 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish (OIDC trusted publisher)
+      # Prefer Trusted Publishing (OIDC). If that is not matched on npm,
+      # set repo secret NPM_TOKEN (granular access token, read+write).
+      - name: Publish
         run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
